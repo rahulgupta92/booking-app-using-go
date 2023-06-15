@@ -4,8 +4,8 @@ import "fmt"
 
 func main() {
 
-	var conferenceName = "Go conference" // variable - can change its value
-	const conferenceTickets uint8 = 50   // constant - cannot change its value
+	conferenceName := "Go conference"  // variable - can change its value
+	const conferenceTickets uint8 = 50 // constant - cannot change its value
 	var remainingTickets uint8 = 50
 
 	fmt.Printf("conferenceTickets is %T. remainingTickets is %T. conferenceName is %T.\n", conferenceTickets, remainingTickets, conferenceName)
