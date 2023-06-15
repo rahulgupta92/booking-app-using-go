@@ -1,0 +1,11 @@
+# IDE
+.idea
+.vscode/
+
+# ENV
+.env
+.netrc
+
+# APP
+
+# Binary file
