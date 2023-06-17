@@ -36,6 +36,11 @@ func main() {
 		fmt.Println("Please enter number of tickets")
 		fmt.Scan(&userTickets) // Pass by reference. Will ask and read for user input, then store that value in the memory address
 
+		if userTickets > remainingTickets {
+			fmt.Printf("We only have %v tickets remaining, so you can't book %v tickets", remainingTickets, userTickets)
+			break
+		}
+
 		remainingTickets = remainingTickets - userTickets
 		bookings = append(bookings, firstName+" "+lastName)
 
