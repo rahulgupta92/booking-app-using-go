@@ -20,23 +20,25 @@ func main() {
 	var email string
 	var userTickets uint8
 
-	fmt.Println("Please enter first name")
-	fmt.Scan(&firstName) // Pass by reference. Will ask and read for user input, then store that value in the memory address
+	for {
+		fmt.Println("Please enter first name")
+		fmt.Scan(&firstName) // Pass by reference. Will ask and read for user input, then store that value in the memory address
 
-	fmt.Println("Please enter last name")
-	fmt.Scan(&lastName) // Pass by reference. Will ask and read for user input, then store that value in the memory address
+		fmt.Println("Please enter last name")
+		fmt.Scan(&lastName) // Pass by reference. Will ask and read for user input, then store that value in the memory address
 
-	fmt.Println("Please enter email")
-	fmt.Scan(&email) // Pass by reference. Will ask and read for user input, then store that value in the memory address
+		fmt.Println("Please enter email")
+		fmt.Scan(&email) // Pass by reference. Will ask and read for user input, then store that value in the memory address
 
-	fmt.Println("Please enter number of tickets")
-	fmt.Scan(&userTickets) // Pass by reference. Will ask and read for user input, then store that value in the memory address
+		fmt.Println("Please enter number of tickets")
+		fmt.Scan(&userTickets) // Pass by reference. Will ask and read for user input, then store that value in the memory address
 
-	remainingTickets = remainingTickets - userTickets
-	bookings = append(bookings, firstName+" "+lastName)
+		remainingTickets = remainingTickets - userTickets
+		bookings = append(bookings, firstName+" "+lastName)
 
-	fmt.Printf("User %v %v booked %v tickets. You will receive a confirmation email at %v\n", firstName, lastName, userTickets, email)
-	fmt.Printf("%v tickets remaining for %v\n", remainingTickets, conferenceName)
+		fmt.Printf("User %v %v booked %v tickets. You will receive a confirmation email at %v\n", firstName, lastName, userTickets, email)
+		fmt.Printf("%v tickets remaining for %v\n", remainingTickets, conferenceName)
 
-	fmt.Printf("These are all our bookings: %v\n", bookings)
+		fmt.Printf("These are all our bookings: %v\n", bookings)
+	}
 }
