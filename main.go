@@ -4,8 +4,8 @@ import "fmt"
 
 func main() {
 
-	conferenceName := "Go conference"  // variable - can change its value
-	const conferenceTickets uint8 = 50 // constant - cannot change its value
+	conferenceName := "Go conference" // variable - can change its value
+	const conferenceTickets = 50      // constant - cannot change its value
 	var remainingTickets uint8 = 50
 
 	fmt.Printf("conferenceTickets is %T. remainingTickets is %T. conferenceName is %T.\n", conferenceTickets, remainingTickets, conferenceName)
@@ -17,7 +17,17 @@ func main() {
 	var userName string
 	var userTickets int
 
-	userName = "rahul"
+	// Pass by value. does not ask for user input. because value is "".
+	fmt.Scan(userName)
+
+	// Pass by reference. Will ask and read for user input, then store that value in the memory address
+	fmt.Scan(&userName)
+
+	// print variable vs its pointer
+	fmt.Println(conferenceName)
+	fmt.Println(&conferenceName)
+
+	//userName = "rahul"
 	userTickets = 2
 	fmt.Printf("User %v booked %v tickets.\n", userName, userTickets)
 
