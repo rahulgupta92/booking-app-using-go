@@ -17,7 +17,7 @@ func main() {
 	var firstName string
 	var lastName string
 	var email string
-	var userTickets int
+	var userTickets uint8
 
 	fmt.Println("Please enter first name")
 	fmt.Scan(&firstName) // Pass by reference. Will ask and read for user input, then store that value in the memory address
@@ -31,6 +31,7 @@ func main() {
 	fmt.Println("Please enter number of tickets")
 	fmt.Scan(&userTickets) // Pass by reference. Will ask and read for user input, then store that value in the memory address
 
+	remainingTickets = remainingTickets - userTickets
 	fmt.Printf("User %v %v booked %v tickets. You will receive a confirmation email at %v\n", firstName, lastName, userTickets, email)
-
+	fmt.Printf("%v tickets remaining for %v", remainingTickets, conferenceName)
 }
