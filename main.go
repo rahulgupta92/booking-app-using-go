@@ -70,6 +70,21 @@ func main() {
 				fmt.Println("Number of tickets is invalid")
 			}
 		}
+		city := "London"
+
+		switch city {
+		case "New York":
+			// logic
+		case "Singapore", "Hong Kong":
+			// logic for SI and HK
+		case "London", "Berlin":
+			// logic for L & B
+			fmt.Println("London")
+		case "Mexico":
+			// logic for M
+		default:
+			fmt.Println("No city selected")
+		}
 
 	}
 }
