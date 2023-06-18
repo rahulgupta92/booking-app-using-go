@@ -1,10 +1,12 @@
 package main
 
 import (
+	"booking-app/helper"
 	"fmt"
 	"strings"
 )
 
+// package level variables
 var conferenceName = "Go conference" // variable - can change its value
 const conferenceTickets = 50         // constant - cannot change its value
 var remainingTickets uint8 = 50
@@ -16,7 +18,7 @@ func main() {
 
 	for {
 		firstName, lastName, email, userTickets := getUserInput()
-		isValidName, isValidEmail, isValidUserTickets := validateUserInput(firstName, lastName, email, userTickets)
+		isValidName, isValidEmail, isValidUserTickets := helper.ValidateUserInput(firstName, lastName, email, userTickets, remainingTickets)
 
 		if isValidName && isValidEmail && isValidUserTickets {
 			remainingTickets, bookings = bookTicket(userTickets, firstName, lastName, email)

@@ -1,8 +1,9 @@
-package main
+package helper
 
 import "strings"
 
-func validateUserInput(firstName string, lastName string, email string, userTickets uint8) (bool, bool, bool) {
+// variable or function shared across packages - global
+func ValidateUserInput(firstName string, lastName string, email string, userTickets uint8, remainingTickets uint8) (bool, bool, bool) {
 	isValidName := len(firstName) >= 2 && len(lastName) >= 2
 	isValidEmail := strings.Contains(email, "@")
 	isValidUserTickets := userTickets > 0 && userTickets <= remainingTickets
