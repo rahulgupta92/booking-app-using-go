@@ -36,28 +36,30 @@ func main() {
 		fmt.Println("Please enter number of tickets")
 		fmt.Scan(&userTickets) // Pass by reference. Will ask and read for user input, then store that value in the memory address
 
-		if userTickets > remainingTickets {
-			fmt.Printf("We only have %v tickets remaining, so you can't book %v tickets", remainingTickets, userTickets)
-			continue
+		if userTickets < remainingTickets {
+			remainingTickets = remainingTickets - userTickets
+			bookings = append(bookings, firstName+" "+lastName)
+
+			fmt.Printf("User %v %v booked %v tickets. You will receive a confirmation email at %v\n", firstName, lastName, userTickets, email)
+			fmt.Printf("%v tickets remaining for %v\n", remainingTickets, conferenceName)
+
+			firstNames := []string{}
+			for _, booking := range bookings { // _ is a blank identified
+				var names = strings.Fields(booking) // declare that it is a variable
+				firstName = names[0]
+				firstNames = append(firstNames, firstName)
+			}
+			fmt.Printf("The first names of our bookings are: %v\n", firstNames)
+
+			if remainingTickets == 0 {
+				fmt.Println("All tickets are sold out. Come back next year")
+				break
+			}
+		} else if userTickets == remainingTickets {
+			// do something else
+		} else {
+			fmt.Printf("We only have %v tickets remaining, so you can't book %v tickets\n", remainingTickets, userTickets)
 		}
 
-		remainingTickets = remainingTickets - userTickets
-		bookings = append(bookings, firstName+" "+lastName)
-
-		fmt.Printf("User %v %v booked %v tickets. You will receive a confirmation email at %v\n", firstName, lastName, userTickets, email)
-		fmt.Printf("%v tickets remaining for %v\n", remainingTickets, conferenceName)
-
-		firstNames := []string{}
-		for _, booking := range bookings { // _ is a blank identified
-			var names = strings.Fields(booking) // declare that it is a variable
-			firstName = names[0]
-			firstNames = append(firstNames, firstName)
-		}
-		fmt.Printf("The first names of our bookings are: %v\n", firstNames)
-
-		if remainingTickets == 0 {
-			fmt.Println("All tickets are sold out. Come back next year")
-			break
-		}
 	}
 }
