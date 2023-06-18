@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"sync"
 	"time"
 )
 
@@ -18,36 +19,37 @@ type userData struct {
 	userTickets uint8
 }
 
+var wg = sync.WaitGroup{}
+
 func main() {
 
 	greetUsers()
 
-	for {
-		firstName, lastName, email, userTickets := getUserInput()
-		isValidName, isValidEmail, isValidUserTickets := ValidateUserInput(firstName, lastName, email, userTickets)
+	firstName, lastName, email, userTickets := getUserInput()
+	isValidName, isValidEmail, isValidUserTickets := ValidateUserInput(firstName, lastName, email, userTickets)
 
-		if isValidName && isValidEmail && isValidUserTickets {
-			remainingTickets, bookings = bookTicket(userTickets, firstName, lastName, email)
-			go sendTicket(userTickets, firstName, lastName, email)
-			firstNames := getFirstNames()
-			fmt.Printf("The first names of our bookings are: %v\n", firstNames)
+	if isValidName && isValidEmail && isValidUserTickets {
+		remainingTickets, bookings = bookTicket(userTickets, firstName, lastName, email)
+		wg.Add(1) // execute this before creating a new thread. it will wait for this thread to execute before the main thread can exit
+		go sendTicket(userTickets, firstName, lastName, email)
+		firstNames := getFirstNames()
+		fmt.Printf("The first names of our bookings are: %v\n", firstNames)
 
-			if remainingTickets == 0 {
-				fmt.Println("All tickets are sold out. Come back next year")
-				break
-			}
-		} else {
-			if !isValidName {
-				fmt.Println("User's first name or last name entered is too short.")
-			}
-			if !isValidEmail {
-				fmt.Println("Email entered is invalid")
-			}
-			if !isValidUserTickets {
-				fmt.Println("Number of tickets is invalid")
-			}
+		if remainingTickets == 0 {
+			fmt.Println("All tickets are sold out. Come back next year")
+		}
+	} else {
+		if !isValidName {
+			fmt.Println("User's first name or last name entered is too short.")
+		}
+		if !isValidEmail {
+			fmt.Println("Email entered is invalid")
+		}
+		if !isValidUserTickets {
+			fmt.Println("Number of tickets is invalid")
 		}
 	}
+	wg.Wait()
 }
 
 func greetUsers() {
@@ -110,4 +112,5 @@ func sendTicket(userTickets uint8, firstName string, lastName string, email stri
 	fmt.Println("#######")
 	fmt.Printf("Sending ticket:\n %v \n to email address %v\n", ticket, email)
 	fmt.Println("#######")
+	wg.Done()
 }
