@@ -36,7 +36,11 @@ func main() {
 		fmt.Println("Please enter number of tickets")
 		fmt.Scan(&userTickets) // Pass by reference. Will ask and read for user input, then store that value in the memory address
 
-		if userTickets < remainingTickets {
+		isValidName := len(firstName) >= 2 && len(lastName) >= 2 && (firstName == "ra" || firstName == "qq")
+		isValidEmail := strings.Contains(email, "@")
+		isValidUserTickets := userTickets > 0 && userTickets <= remainingTickets
+
+		if isValidName && isValidEmail && isValidUserTickets {
 			remainingTickets = remainingTickets - userTickets
 			bookings = append(bookings, firstName+" "+lastName)
 
@@ -55,10 +59,8 @@ func main() {
 				fmt.Println("All tickets are sold out. Come back next year")
 				break
 			}
-		} else if userTickets == remainingTickets {
-			// do something else
 		} else {
-			fmt.Printf("We only have %v tickets remaining, so you can't book %v tickets\n", remainingTickets, userTickets)
+			fmt.Println("Your input data is invalid. Please try again.")
 		}
 
 	}
