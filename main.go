@@ -2,14 +2,20 @@ package main
 
 import (
 	"fmt"
-	"strconv"
 )
 
 // package level variables
 var conferenceName = "Go conference" // variable - can change its value
 const conferenceTickets = 50         // constant - cannot change its value
 var remainingTickets uint8 = 50
-var bookings = make([]map[string]string, 0)
+var bookings = make([]userData, 0)
+
+type userData struct {
+	firstName   string
+	lastName    string
+	email       string
+	userTickets uint8
+}
 
 func main() {
 
@@ -51,7 +57,7 @@ func greetUsers() {
 func getFirstNames() []string {
 	firstNames := []string{}
 	for _, booking := range bookings { // _ is a blank identifier
-		firstNames = append(firstNames, booking["firstName"])
+		firstNames = append(firstNames, booking.firstName)
 	}
 	return firstNames
 }
@@ -77,14 +83,15 @@ func getUserInput() (string, string, string, uint8) {
 	return firstName, lastName, email, userTickets
 }
 
-func bookTicket(userTickets uint8, firstName string, lastName string, email string) (uint8, []map[string]string) {
+func bookTicket(userTickets uint8, firstName string, lastName string, email string) (uint8, []userData) {
 	remainingTickets = remainingTickets - userTickets
 
-	var userData = make(map[string]string)
-	userData["firstName"] = firstName
-	userData["lastName"] = lastName
-	userData["email"] = email
-	userData["userTickets"] = strconv.FormatUint(uint64(userTickets), 10)
+	var userData = userData{
+		firstName:   firstName,
+		lastName:    lastName,
+		email:       email,
+		userTickets: userTickets,
+	}
 
 	bookings = append(bookings, userData)
 	fmt.Printf("List of bookings is %v", bookings)
