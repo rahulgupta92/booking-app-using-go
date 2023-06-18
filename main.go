@@ -23,7 +23,7 @@ func main() {
 	var email string
 	var userTickets uint8
 
-	for {
+	for true {
 		fmt.Println("Please enter first name")
 		fmt.Scan(&firstName) // Pass by reference. Will ask and read for user input, then store that value in the memory address
 
